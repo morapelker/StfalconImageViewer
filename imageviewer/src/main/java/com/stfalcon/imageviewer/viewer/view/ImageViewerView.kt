@@ -191,6 +191,8 @@ internal class ImageViewerView<T> @JvmOverloads constructor(
 
         externalTransitionImageView = transitionImageView
 
+        if (images.size <= startPosition)
+            startPosition = 0
         imageLoader?.loadImage(this.transitionImageView, images[startPosition])
         this.transitionImageView.copyBitmapFrom(transitionImageView)
 
