@@ -21,7 +21,9 @@ import android.view.MotionEvent
 
 internal class SimpleOnGestureListener(
     private val onSingleTap: ((MotionEvent) -> Boolean)? = null,
-    private val onDoubleTap: ((MotionEvent) -> Boolean)? = null
+    private val onDoubleTap: ((MotionEvent) -> Boolean)? = null,
+    private val onLongPress: (() -> Unit)? = null
+
 ) : GestureDetector.SimpleOnGestureListener() {
 
     override fun onSingleTapConfirmed(event: MotionEvent): Boolean =
@@ -29,4 +31,8 @@ internal class SimpleOnGestureListener(
 
     override fun onDoubleTap(event: MotionEvent): Boolean =
         onDoubleTap?.invoke(event) ?: false
+
+    override fun onLongPress(e: MotionEvent?) {
+        onLongPress?.invoke()
+    }
 }

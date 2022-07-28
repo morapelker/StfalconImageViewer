@@ -29,6 +29,7 @@ class PostersGridDemoActivity : AppCompatActivity() {
         viewer = StfalconImageViewer.Builder<Poster>(this, Demo.posters, ::loadPosterImage)
             .withStartPosition(startPosition)
             .withTransitionFrom(target)
+            .withLongPress { println("long tapped caught with index $it") }
             .withImageChangeListener {
                 viewer.updateTransitionImage(postersGridView.imageViews[it])
             }

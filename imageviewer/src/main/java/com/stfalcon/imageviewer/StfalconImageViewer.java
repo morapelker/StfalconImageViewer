@@ -20,8 +20,10 @@ import android.content.Context;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+
 import androidx.annotation.*;
 import androidx.core.content.ContextCompat;
+
 import com.stfalcon.imageviewer.listeners.OnDismissListener;
 import com.stfalcon.imageviewer.listeners.OnImageChangeListener;
 import com.stfalcon.imageviewer.loader.ImageLoader;
@@ -31,6 +33,11 @@ import com.stfalcon.imageviewer.viewer.dialog.ImageViewerDialog;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import kotlin.Function;
+import kotlin.Unit;
+import kotlin.jvm.functions.Function0;
+import kotlin.jvm.functions.Function1;
 
 //N.B.! This class is written in Java for convenient use of lambdas due to languages compatibility issues.
 @SuppressWarnings({"unused", "WeakerAccess"})
@@ -103,7 +110,7 @@ public class StfalconImageViewer<T> {
         return dialog.getCurrentPosition();
     }
 
-    public int setCurrentPosition(int position){
+    public int setCurrentPosition(int position) {
         return dialog.setCurrentPosition(position);
     }
 
@@ -275,6 +282,16 @@ public class StfalconImageViewer<T> {
          */
         public Builder<T> withTransitionFrom(ImageView imageView) {
             this.data.setTransitionView(imageView);
+            return this;
+        }
+
+        /**
+         * Sets a target {@link ImageView} to be part of transition when opening or closing the viewer/
+         *
+         * @return This Builder object to allow calls chaining
+         */
+        public Builder<T> withLongPress(Function1<Integer, Unit> onLongPress) {
+            this.data.setOnLongPress(onLongPress);
             return this;
         }
 

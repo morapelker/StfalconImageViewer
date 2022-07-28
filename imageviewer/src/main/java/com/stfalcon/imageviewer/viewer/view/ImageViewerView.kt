@@ -72,6 +72,8 @@ internal class ImageViewerView<T> @JvmOverloads constructor(
 
     internal var containerPadding = intArrayOf(0, 0, 0, 0)
 
+    internal var onLongPress: ((Int) -> Unit)? = null
+
     internal var imagesMargin
         get() = imagesPager.pageMargin
         set(value) {
@@ -344,6 +346,9 @@ internal class ImageViewerView<T> @JvmOverloads constructor(
             onDoubleTap = {
                 wasDoubleTapped = !isScaled
                 false
+            },
+            onLongPress = {
+                onLongPress?.invoke(currentPosition)
             }
         ))
 
